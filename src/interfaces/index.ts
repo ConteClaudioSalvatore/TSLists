@@ -15,7 +15,7 @@ export interface IList<T> extends Omit<ArrayLike<T>, "length"> {
   /**
    * Gets or sets the element at the specified index.
    */
-  [Symbol.iterator](): IterableIterator<T>;
+  [Symbol.iterator](): Iterator<T>;
   /**
    * Adds an object to the end of the {@link IList<T>}.
    * @param item the item to add to the List
@@ -399,4 +399,10 @@ export interface IList<T> extends Omit<ArrayLike<T>, "length"> {
    * This method is an O(_n_) operation, where _n_ is {@link Count}.
    */
   TrueForAll(match: Predicate<T>): boolean;
+  /**
+   * Returns a string that represents the current {@link IList<T>}.
+   * @returns A string that represents the current {@link IList<T>}.
+   * @remarks This method calls the {@link Array.prototype.toString} method to convert each element of the current {@link IList<T>} to its string representation, and then returns the concatenation of these strings.
+   */
+  ToString(): string;
 }

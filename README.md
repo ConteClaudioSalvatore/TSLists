@@ -7,9 +7,9 @@ This is a simple library for working with lists in TypeScript. It inspired by `C
 ## Installation
 
 ```bash
-npm install @conteClaudioSalvatore/ts-lists
+npm install @TSLists/core
 
 # or
 
-yarn add @conteClaudioSalvatore/ts-lists
+yarn add @TSLists/core
 ```
