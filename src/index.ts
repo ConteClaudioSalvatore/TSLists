@@ -56,8 +56,8 @@ export class List<T> implements System.IList<T> {
 
   Add(item: T): void {
     this.EnsureCapacity(this.Count + 1);
-    this[this.count] = item;
     this.count++;
+    this[this.Count - 1] = item;
   }
   AddRange(items: Array<T>): void {
     items.forEach((item) => this.Add(item));
@@ -123,8 +123,8 @@ export class List<T> implements System.IList<T> {
   }
   EnsureCapacity(capacity: number): number {
     if (this.capacity < capacity) {
-      for (let i = this.capacity; i < capacity; i * 2) {
-        this.capacity *= 2;
+      for (let i = this.capacity; this.capacity < capacity; i *= 2) {
+        this.capacity = i;
       }
     }
     return this.Capacity;
@@ -304,5 +304,14 @@ export class List<T> implements System.IList<T> {
   }
   ToString(): string {
     return [...this].toString();
+  }
+  ElementAt(index: number): T {
+    if (index < -(this.Count + 1) || index > this.Count - 1) {
+      throw new Error("Index out of range");
+    }
+    if (index < 0) {
+      return this[this.Count + index];
+    }
+    return this[index];
   }
 }

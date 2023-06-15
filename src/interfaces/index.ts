@@ -1,5 +1,5 @@
 export type Converter<TInput, TOutput> = (input: TInput) => TOutput;
-export type Action<T> = (input: T) => void;
+export type Action<T> = (input: T, index: number) => void;
 export type Predicate<T> = (input: T) => boolean;
 export type Comparison<T> = (x: T, y: T) => number;
 
@@ -405,4 +405,13 @@ export interface IList<T> extends Omit<ArrayLike<T>, "length"> {
    * @remarks This method calls the {@link Array.prototype.toString} method to convert each element of the current {@link IList<T>} to its string representation, and then returns the concatenation of these strings.
    */
   ToString(): string;
+  /**
+   * Gets the element at the specified index.
+   * @param index The index of the element to get (can be negative to specify a position relative to the end of the list)
+   * @returns The element at the specified index.
+   * @remarks This method is an O(_n_) operation, where _n_ is {@link index}.
+   *
+   * @throws `System.ArgumentOutOfRangeException` *index* is less than (-{@link Count}) or greater than or equal to {@link Count}.
+   */
+  ElementAt(index: number): T;
 }

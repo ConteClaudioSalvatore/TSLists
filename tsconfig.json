@@ -104,6 +104,7 @@
   },
   "include": [
     "src/**/*",
-    "examples/**/*"
+    "examples/**/*",
+    "index.ts"
   ],
 }

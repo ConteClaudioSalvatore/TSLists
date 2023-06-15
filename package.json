@@ -1,6 +1,6 @@
 {
-  "name": "ts-lists",
   "version": "1.0.0",
+  "name": "ts-lists",
   "description": "a typescript extension for Lists instead of arrays",
   "keywords": [
     "typescript",
@@ -12,7 +12,7 @@
     "LICENSE",
     "README.md"
   ],
-  "main": "index.ts",
+  "main": "dist/index.ts",
   "repository": "https://github.com/ConteClaudioSalvatore/TSLists",
   "author": "ConteClaudioSalvatore <claudioconte51@gmail.com>",
   "license": "MIT",
