@@ -253,16 +253,19 @@ export class List<T> implements System.IList<T> {
       this,
       [...this].filter((item) => !items.includes(item))
     );
+    this.count -= items.length;
     return items.length;
   }
   RemoveAt(index: number): void {
     const aus = [...this];
     aus.splice(index, 1);
+    this.count--;
     Object.assign(this, aus);
   }
   RemoveRange(index: number, count: number): void {
     const aus = [...this];
     aus.splice(index, count);
+    this.count -= count;
     Object.assign(this, aus);
   }
   Reverse(): void;

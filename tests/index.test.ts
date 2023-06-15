@@ -239,22 +239,19 @@ describe("List tests", function () {
     expect(myList[5]).toBe("ciao");
   });
   test("List Sort method", function () {
-    const myList = new List<string>([
-      "ciao",
-      "mondo",
-      "come",
-      "va",
-      "?",
-      "come",
-    ]);
+    const myList = new List<number>([4, 5, 2, 6]);
     myList.Sort();
-    expect(myList.Count).toBe(6);
-    expect(myList[0]).toBe("?");
-    expect(myList[1]).toBe("come");
-    expect(myList[2]).toBe("come");
-    expect(myList[3]).toBe("ciao");
-    expect(myList[4]).toBe("mondo");
-    expect(myList[5]).toBe("va");
+    expect(myList.Count).toBe(4);
+    expect(myList[0]).toBe(2);
+    expect(myList[1]).toBe(4);
+    expect(myList[2]).toBe(5);
+    expect(myList[3]).toBe(6);
+    myList.Sort((a, b) => b - a);
+    expect(myList.Count).toBe(4);
+    expect(myList[0]).toBe(6);
+    expect(myList[1]).toBe(5);
+    expect(myList[2]).toBe(4);
+    expect(myList[3]).toBe(2);
   });
   test("List ToArray method", function () {
     const myList = new List<string>([
