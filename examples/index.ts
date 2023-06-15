@@ -1,8 +1,10 @@
 import { List } from  "../src/index";
 const ciao = new List<string>(["ciao", "mondo", "come", "va", "?"]);
-console.log(ciao.Count);
+console.log("List.Count: ", ciao.Count);
 ciao.ForEach((x) => console.log(x));
-console.log(ciao.ToString());
-console.log(ciao);
-console.log(ciao.ToArray());
-console.log(ciao.Contains("ciao"));
+console.log("List.ToString(): ", ciao.ToString());
+console.log("List: ", ciao);
+console.log("List.ToArray(): ", ciao.ToArray());
+console.log("List.Contains('ciao'): ", ciao.Contains("ciao"));
+console.log("List[0]: ", ciao[0]);
+console.log("List.IndexOf('ciao'): ", ciao.IndexOf("ciao"));
