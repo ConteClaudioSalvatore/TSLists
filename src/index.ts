@@ -306,8 +306,11 @@ export class List<T> implements System.IList<T> {
     return [...this].toString();
   }
   ElementAt(index: number): T {
-    if (index < -(this.Count + 1) || index > this.Count - 1) {
-      throw new Error("Index out of range");
+    if (index < -this.Count || index > this.Count - 1) {
+      throw new Error(
+        `Index out of range, max was ${this.Count - 1}, min was ${-this
+          .Count}, but ${index} was given`
+      );
     }
     if (index < 0) {
       return this[this.Count + index];
