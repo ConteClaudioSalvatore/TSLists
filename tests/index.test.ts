@@ -300,13 +300,149 @@ describe("List tests", function () {
       myList.ElementAt(-6);
     } catch (e) {
       expect(e instanceof RangeError).toBe(true);
-      expect((e as RangeError).message).toBe("Index out of range, max was 4, min was -5, but -6 was given");
+      expect((e as RangeError).message).toBe(
+        "Index out of range, max was 4, min was -5, but -6 was given"
+      );
     }
     try {
       myList.ElementAt(5);
     } catch (e) {
       expect(e instanceof RangeError).toBe(true);
-      expect((e as RangeError).message).toBe("Index out of range, max was 4, min was -5, but 5 was given");
+      expect((e as RangeError).message).toBe(
+        "Index out of range, max was 4, min was -5, but 5 was given"
+      );
     }
+  });
+  test("List First element or null", function () {
+    const myList = new List<string>(["ciao", "mondo", "come", "va", "?"]);
+    expect(myList.First()).toBe("ciao");
+    expect(myList.First((x) => x === "come")).toBe("come");
+    expect(myList.First((x) => x === "non ci sono")).toBe(null);
+  });
+  test("List First element or default", function () {
+    const listOfStrings = new List<string>([
+      "ciao",
+      "mondo",
+      "come",
+      "va",
+      "?",
+    ]);
+    expect(listOfStrings.FirstOrDefault("string")).toBe("ciao");
+    expect(listOfStrings.FirstOrDefault("string", (x) => x === "come")).toBe(
+      "come"
+    );
+    expect(
+      listOfStrings.FirstOrDefault("string", (x) => x === "non ci sono")
+    ).toBe("");
+    const listOfObjects = new List<{ name: string; age: number }>([
+      { name: "ciao", age: 1 },
+      { name: "mondo", age: 2 },
+      { name: "come", age: 3 },
+      { name: "va", age: 4 },
+      { name: "?", age: 5 },
+    ]);
+    expect(listOfObjects.FirstOrDefault("object")).toEqual({
+      name: "ciao",
+      age: 1,
+    });
+    expect(listOfObjects.FirstOrDefault("object", (x) => x.age === 3)).toEqual({
+      name: "come",
+      age: 3,
+    });
+    expect(listOfObjects.FirstOrDefault("object", (x) => x.age === 6)).toEqual(
+      {}
+    );
+    const listOfNumbers = new List<number>([1, 2, 3, 4, 5]);
+    expect(listOfNumbers.FirstOrDefault("number")).toBe(1);
+    expect(listOfNumbers.FirstOrDefault("number", (x) => x === 3)).toBe(3);
+    expect(listOfNumbers.FirstOrDefault("number", (x) => x === 6)).toBe(0);
+    const listOfBooleans = new List<boolean>([true, false, true]);
+    expect(listOfBooleans.FirstOrDefault("boolean")).toBe(true);
+    expect(listOfBooleans.FirstOrDefault("boolean", (x) => x === false)).toBe(
+      false
+    );
+    expect(listOfBooleans.FirstOrDefault("boolean", (x) => x === null)).toBe(
+      false
+    );
+    const listOfArrays = new List<number[]>([
+      [1, 2, 3],
+      [4, 5, 6],
+    ]);
+    expect(listOfArrays.FirstOrDefault("array")).toEqual([1, 2, 3]);
+    expect(listOfArrays.FirstOrDefault("array", (x) => x.includes(4))).toEqual([
+      4, 5, 6,
+    ]);
+    expect(listOfArrays.FirstOrDefault("array", (x) => x.includes(7))).toEqual(
+      []
+    );
+    const emptyList = new List<number>([]);
+    expect(emptyList.FirstOrDefault("number")).toBe(0);
+    expect(emptyList.FirstOrDefault("number", (x) => x === 3)).toBe(0);
+  });
+  test("List Last element or null", function () {
+    const myList = new List<string>(["ciao", "mondo", "come", "va", "?"]);
+    expect(myList.Last()).toBe("?");
+    expect(myList.Last((x) => x === "come")).toBe("come");
+    expect(myList.Last((x) => x === "non ci sono")).toBe(null);
+  });
+  test("List Last element or default", function () {
+    const listOfStrings = new List<string>([
+      "ciao",
+      "mondo",
+      "come",
+      "va",
+      "?",
+    ]);
+    expect(listOfStrings.LastOrDefault("string")).toBe("?");
+    expect(listOfStrings.LastOrDefault("string", (x) => x === "come")).toBe(
+      "come"
+    );
+    expect(
+      listOfStrings.LastOrDefault("string", (x) => x === "non ci sono")
+    ).toBe("");
+    const listOfObjects = new List<{ name: string; age: number }>([
+      { name: "ciao", age: 1 },
+      { name: "mondo", age: 2 },
+      { name: "come", age: 3 },
+      { name: "va", age: 4 },
+      { name: "?", age: 5 },
+    ]);
+    expect(listOfObjects.LastOrDefault("object")).toEqual({
+      name: "?",
+      age: 5,
+    });
+    expect(listOfObjects.LastOrDefault("object", (x) => x.age === 3)).toEqual({
+      name: "come",
+      age: 3,
+    });
+    expect(listOfObjects.LastOrDefault("object", (x) => x.age === 6)).toEqual(
+      {}
+    );
+    const listOfNumbers = new List<number>([1, 2, 3, 4, 5]);
+    expect(listOfNumbers.LastOrDefault("number")).toBe(5);
+    expect(listOfNumbers.LastOrDefault("number", (x) => x === 3)).toBe(3);
+    expect(listOfNumbers.LastOrDefault("number", (x) => x === 6)).toBe(0);
+    const listOfBooleans = new List<boolean>([true, false, true]);
+    expect(listOfBooleans.LastOrDefault("boolean")).toBe(true);
+    expect(listOfBooleans.LastOrDefault("boolean", (x) => x === false)).toBe(
+      false
+    );
+    expect(listOfBooleans.LastOrDefault("boolean", (x) => x === null)).toBe(
+      false
+    );
+    const listOfArrays = new List<number[]>([
+      [1, 2, 3],
+      [4, 5, 6],
+    ]);
+    expect(listOfArrays.LastOrDefault("array")).toEqual([4, 5, 6]);
+    expect(listOfArrays.LastOrDefault("array", (x) => x.includes(4))).toEqual([
+      4, 5, 6,
+    ]);
+    expect(listOfArrays.LastOrDefault("array", (x) => x.includes(7))).toEqual(
+      []
+    );
+    const emptyList = new List<number>([]);
+    expect(emptyList.LastOrDefault("number")).toBe(0);
+    expect(emptyList.LastOrDefault("number", (x) => x === 3)).toBe(0);
   });
 });

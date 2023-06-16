@@ -414,4 +414,48 @@ export interface IList<T> extends Omit<ArrayLike<T>, "length"> {
    * @throws `System.ArgumentOutOfRangeException` *index* is less than (-{@link Count}) or greater than or equal to {@link Count}.
    */
   ElementAt(index: number): T;
+  /**
+   * Gets the First Element matching the specified predicate, if its not specified returns the first element.
+   * @param match The {@link Predicate<T>} delegate that defines the conditions of the element to get.
+   * @returns The element matching the specified predicate, if its not specified returns the first element.
+   * @remarks The {@link Predicate<T>} is a delegate to a method that returns `true` if the object passed to it matches the conditions defined in the delegate.
+   *
+   * This method is an O(_n_) operation, where _n_ is {@link Count}.
+   */
+  First(match?: Predicate<T>): T | null;
+  /**
+   * Gets the First element of the sequence that satisfies a condition or a default value if no such element is found.
+   * @param defaultType The type of the default value to return if no element is found.
+   * @param match The {@link Predicate<T>} delegate that defines the conditions of the element to get.
+   * @returns The first element that satisfies the condition, if no such element is found returns a default value.
+   * @remarks The {@link Predicate<T>} is a delegate to a method that returns `true` if the object passed to it matches the conditions defined in the delegate.
+   *
+   * This method is an O(_n_) operation, where _n_ is {@link Count}.
+   */
+  FirstOrDefault(
+    defaultType: "string" | "object" | "array" | "number" | "boolean",
+    match?: Predicate<T>
+  ): T;
+  /**
+   * Gets the Last element of the sequence that satisfies a condition, if not specified returns the last element, if no such element is found returns `null`.
+   * @param match The {@link Predicate<T>} delegate that defines the conditions of the element to get.
+   * @returns The last element that satisfies the condition, if not specified returns the last element, if no such element is found returns `null`.
+   * @remarks The {@link Predicate<T>} is a delegate to a method that returns `true` if the object passed to it matches the conditions defined in the delegate.
+   *
+   * This method is an O(_n_) operation, where _n_ is {@link Count}.
+   */
+  Last(match?: Predicate<T>): T | null;
+  /**
+   * Gets the Last element of the sequence that satisfies a condition or a default value if no such element is found.
+   * @param defaultType The type of the default value to return if no element is found.
+   * @param match The {@link Predicate<T>} delegate that defines the conditions of the element to get.
+   * @returns The first element that satisfies the condition, if no such element is found returns a default value.
+   * @remarks The {@link Predicate<T>} is a delegate to a method that returns `true` if the object passed to it matches the conditions defined in the delegate.
+   *
+   * This method is an O(_n_) operation, where _n_ is {@link Count}.
+   */
+  FirstOrDefault(
+    defaultType: "string" | "object" | "array" | "number" | "boolean",
+    match?: Predicate<T>
+  ): T;
 }

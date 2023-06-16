@@ -12,27 +12,6 @@ export class List<T> implements System.IList<T> {
 
   [key: number]: T;
 
-  [Symbol.iterator](): Iterator<T, any, undefined> {
-    let index = 0;
-    const data = this;
-    const length = this.count;
-    return {
-      next(): IteratorResult<T> {
-        if (index < length) {
-          return {
-            done: false,
-            value: data[index++],
-          };
-        } else {
-          return {
-            done: true,
-            value: null,
-          };
-        }
-      },
-    };
-  }
-
   constructor();
   constructor(items: Array<T>);
   constructor(items: number);
@@ -52,6 +31,27 @@ export class List<T> implements System.IList<T> {
     Object.assign(this, new Array<T>());
     this.count = 0;
     this.capacity = 0;
+  }
+
+  [Symbol.iterator](): Iterator<T, any, undefined> {
+    let index = 0;
+    const data = this;
+    const length = this.count;
+    return {
+      next(): IteratorResult<T> {
+        if (index < length) {
+          return {
+            done: false,
+            value: data[index++],
+          };
+        } else {
+          return {
+            done: true,
+            value: null,
+          };
+        }
+      },
+    };
   }
 
   Add(item: T): void {
@@ -329,5 +329,65 @@ export class List<T> implements System.IList<T> {
       return this[this.Count + index];
     }
     return this[index];
+  }
+  First(match?: System.Predicate<T> | undefined): T | null {
+    let item: T | undefined;
+    if (match !== undefined) item = [...this].find(match);
+    else item = this[0];
+    if (item !== undefined) return item;
+    return null;
+  }
+  FirstOrDefault(
+    defaultType: "string" | "object" | "array" | "number" | "boolean",
+    match?: System.Predicate<T> | undefined
+  ): T {
+    let item: T | undefined;
+    if (match !== undefined) item = [...this].find(match);
+    else item = this[0];
+    if (item !== undefined) return item;
+    switch (defaultType) {
+      case "string":
+        return "" as T;
+      case "object":
+        return {} as T;
+      case "array":
+        return [] as T;
+      case "number":
+        return 0 as T;
+      case "boolean":
+        return false as T;
+      default:
+        return "" as T;
+    }
+  }
+  Last(match?: System.Predicate<T> | undefined): T | null {
+    let item: T | undefined = undefined;
+    if (match !== undefined) item = [...this].reverse().find(match);
+    else if (this.Count > 0) item = this[this.Count - 1];
+    if (item !== undefined) return item;
+    return null;
+  }
+  LastOrDefault(
+    defaultType: "string" | "object" | "array" | "number" | "boolean",
+    match?: System.Predicate<T> | undefined
+  ): T {
+    let item: T | undefined = undefined;
+    if (match !== undefined) item = [...this].reverse().find(match);
+    else if (this.Count > 0) item = this[this.Count - 1];
+    if (item !== undefined) return item;
+    switch (defaultType) {
+      case "string":
+        return "" as T;
+      case "object":
+        return {} as T;
+      case "array":
+        return [] as T;
+      case "number":
+        return 0 as T;
+      case "boolean":
+        return false as T;
+      default:
+        return "" as T;
+    }
   }
 }
