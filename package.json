@@ -14,7 +14,7 @@
     "arrays"
   ],
   "files": [
-    "dist/index.js",
+    "dist/**/*",
     "LICENSE",
     "README.md"
   ],
