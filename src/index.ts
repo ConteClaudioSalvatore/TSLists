@@ -173,10 +173,11 @@ export class List<T> implements System.IList<T> {
     match: System.Predicate<T>
   ): number;
   FindLastIndex(startIndex: unknown, count?: unknown, match?: unknown): number {
+    let index = 0;
     if (typeof startIndex === "number") {
       if (typeof count === "number") {
         if (typeof match === "function") {
-          return [...this]
+          index = [...this]
             .slice(0, startIndex)
             .reverse()
             .findIndex(match as System.Predicate<T>);
@@ -184,19 +185,19 @@ export class List<T> implements System.IList<T> {
         throw new Error("Invalid match");
       }
       if (typeof count === "function") {
-        return [...this]
+        index = [...this]
           .slice(0, startIndex)
           .reverse()
           .findIndex(count as System.Predicate<T>);
       }
     }
     if (typeof startIndex === "function") {
-      return [...this]
+      index = [...this]
         .slice(0, this.Count)
         .reverse()
         .findIndex(startIndex as System.Predicate<T>);
     }
-    throw new Error("Invalid match");
+    return index === -1 ? index : this.Count - 1 - index;
   }
   ForEach(action: System.Action<T>): void {
     [...this].forEach(action);
@@ -219,30 +220,41 @@ export class List<T> implements System.IList<T> {
   Insert(index: number, item: T): void {
     const aus = [...this];
     aus.splice(index, 0, item);
+    this.count += 1;
+    this.EnsureCapacity(this.Count);
     Object.assign(this, aus);
   }
   InsertRange(index: number, collection: Array<T>): void {
-    [...this].splice(index, 0, ...collection);
+    const aus = [...this];
+    aus.splice(index, 0, ...collection);
+    this.count += collection.length;
+    this.EnsureCapacity(this.Count);
+    Object.assign(this, aus);
   }
   LastIndexOf(item: T): number;
   LastIndexOf(item: T, index: number): number;
   LastIndexOf(item: T, index: number, count: number): number;
   LastIndexOf(item: T, index?: number, count?: number): number {
+    let found = 0;
     if (index !== undefined) {
       if (count !== undefined) {
-        return [...this]
+        found = [...this]
           .slice(0, index + count)
           .reverse()
           .indexOf(item);
       }
-      return [...this].slice(0, index).reverse().indexOf(item);
+      found = [...this].slice(0, index).reverse().indexOf(item);
     }
-    return [...this].reverse().indexOf(item);
+    found = [...this].reverse().indexOf(item);
+    return found === -1 ? found : this.Count - 1 - found;
   }
   Remove(item: T): boolean {
     const index = [...this].indexOf(item);
     if (index !== -1) {
-      [...this].splice(index, 1);
+      const aus = [...this];
+      aus.splice(index, 1);
+      this.count--;
+      Object.assign(this, aus);
       return true;
     }
     return false;
@@ -291,9 +303,7 @@ export class List<T> implements System.IList<T> {
     const aus = [...this];
     if (comparison !== undefined) {
       aus.sort(comparison);
-      return;
-    }
-    aus.sort();
+    } else aus.sort();
     Object.assign(this, aus);
   }
   ToArray(): T[] {
@@ -310,7 +320,7 @@ export class List<T> implements System.IList<T> {
   }
   ElementAt(index: number): T {
     if (index < -this.Count || index > this.Count - 1) {
-      throw new Error(
+      throw new RangeError(
         `Index out of range, max was ${this.Count - 1}, min was ${-this
           .Count}, but ${index} was given`
       );

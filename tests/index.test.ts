@@ -296,11 +296,17 @@ describe("List tests", function () {
     expect(myList.ElementAt(-3)).toBe("come");
     expect(myList.ElementAt(-4)).toBe("mondo");
     expect(myList.ElementAt(-5)).toBe("ciao");
-    expect(myList.ElementAt(-6)).toThrowError(
-      "Index out of range, max was 4, min was -5, but -6 was given"
-    );
-    expect(myList.ElementAt(5)).toThrowError(
-      "Index out of range, max was 4, min was -5, but 5 was given"
-    );
+    try {
+      myList.ElementAt(-6);
+    } catch (e) {
+      expect(e instanceof RangeError).toBe(true);
+      expect((e as RangeError).message).toBe("Index out of range, max was 4, min was -5, but -6 was given");
+    }
+    try {
+      myList.ElementAt(5);
+    } catch (e) {
+      expect(e instanceof RangeError).toBe(true);
+      expect((e as RangeError).message).toBe("Index out of range, max was 4, min was -5, but 5 was given");
+    }
   });
 });
