@@ -347,17 +347,17 @@ export class List<T> implements System.IList<T> {
     if (item !== undefined) return item;
     switch (defaultType) {
       case "string":
-        return "" as T;
+        return "" as any;
       case "object":
-        return {} as T;
+        return {} as any;
       case "array":
-        return [] as T;
+        return [] as any;
       case "number":
-        return 0 as T;
+        return 0 as any;
       case "boolean":
-        return false as T;
+        return false as any;
       default:
-        return "" as T;
+        return "" as any;
     }
   }
   Last(match?: System.Predicate<T> | undefined): T | null {
@@ -377,17 +377,17 @@ export class List<T> implements System.IList<T> {
     if (item !== undefined) return item;
     switch (defaultType) {
       case "string":
-        return "" as T;
+        return "" as any;
       case "object":
-        return {} as T;
+        return {} as any;
       case "array":
-        return [] as T;
+        return [] as any;
       case "number":
-        return 0 as T;
+        return 0 as any;
       case "boolean":
-        return false as T;
+        return false as any;
       default:
-        return "" as T;
+        return "" as any;
     }
   }
 }
