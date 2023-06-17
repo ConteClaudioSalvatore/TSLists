@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "name": "ts-list-core",
+  "name": "dotnet-ts-list",
   "description": "a typescript extension Lists (similar to C# Lists)",
   "keywords": [
     "typescript",

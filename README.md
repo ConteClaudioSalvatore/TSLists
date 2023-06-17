@@ -7,11 +7,11 @@ This is a simple library for working with lists in TypeScript. It inspired by `C
 ## Installation
 
 ```bash
-npm install ts-list-core
+npm install dotnet-ts-list
 
 # or
 
-yarn add ts-list-core
+yarn add dotnet-ts-list
 ```
 
 ## Usage
