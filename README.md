@@ -1,4 +1,4 @@
-# TSLists
+# node-ts-list
 
 ## Description
 
