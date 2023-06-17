@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "name": "dotnet-ts-list",
   "description": "a typescript extension Lists (similar to C# Lists)",
   "keywords": [
@@ -20,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ConteClaudioSalvatore/TSLists.git"
+    "url": "git+https://github.com/ConteClaudioSalvatore/dotnet-ts-list.git"
   },
   "author": "ConteClaudioSalvatore <claudioconte51@gmail.com>",
   "license": "MIT",
@@ -34,9 +34,9 @@
     "ts-jest": "29.1.0"
   },
   "bugs": {
-    "url": "https://github.com/ConteClaudioSalvatore/TSLists/issues"
+    "url": "https://github.com/ConteClaudioSalvatore/dotnet-ts-list/issues"
   },
-  "homepage": "https://github.com/ConteClaudioSalvatore/TSLists#readme",
+  "homepage": "https://github.com/ConteClaudioSalvatore/dotnet-ts-list#readme",
   "directories": {
     "test": "tests"
   },
