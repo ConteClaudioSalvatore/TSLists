@@ -1,4 +1,4 @@
-# node-ts-list
+# dotnet-ts-list
 
 ## Description
 
