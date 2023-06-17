@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "dotnet-ts-list",
   "description": "a typescript extension Lists (similar to C# Lists)",
   "keywords": [
@@ -43,5 +43,6 @@
   "scripts": {
     "test": "yarn jest",
     "build": "tsc"
-  }
+  },
+  "main": "dist/index.js"
 }
