@@ -17,7 +17,7 @@ yarn add dotnet-ts-list
 ## Usage
 
 ```typescript
-import { List } from 'ts-lists';
+import { List } from 'dotnet-ts-list';
 
 const list = new List<number>([1, 2, 3, 4, 5]);
 
